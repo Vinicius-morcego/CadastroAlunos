@@ -29,7 +29,7 @@ public class EstadoController {
 		return estadoService.listar();
 	}
 	
-	@GetMapping("/estadoId")
+	@GetMapping("/{estadoId}")
 	public Estado buscar(@PathVariable Long estadoId) {
 		return estadoService.buscarOuFalhar(estadoId);
 	}
