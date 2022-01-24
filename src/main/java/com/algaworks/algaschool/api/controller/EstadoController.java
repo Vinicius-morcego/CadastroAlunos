@@ -18,7 +18,7 @@ import com.algaworks.algaschool.domain.modelo.Estado;
 import com.algaworks.algaschool.domain.service.CadastroEstadoService;
 
 @RestController()
-@RequestMapping("/estados")
+@RequestMapping(value = "/estado")
 public class EstadoController {
 
 	@Autowired
@@ -45,7 +45,7 @@ public class EstadoController {
 		
 	}
 	
-	@DeleteMapping("/estadoId")
+	@DeleteMapping("/{estadoId}")
 	public void deletar(@PathVariable Long estadoId) {
 		estadoService.deletar(estadoId);
 	}
