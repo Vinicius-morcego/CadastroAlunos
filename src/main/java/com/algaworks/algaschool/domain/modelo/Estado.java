@@ -24,12 +24,7 @@ public class Estado {
 	private Long id;
 	
 	@NotNull
-	private String sigla;
-	
-	@NotNull
-	@OneToMany(mappedBy = "estado")
-	@JoinColumn(name = "estado_cidade_id")
-	private Cidade cidade;
+	private String sigla;	
 	
 	
 }
