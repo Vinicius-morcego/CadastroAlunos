@@ -21,17 +21,6 @@ public class CadastroEstadoService {
 		return estadoRepository.save(estado);
 	}
 	
-	public Estado atualizar(Long estadoId) {
-		Estado estado = buscarOuFalhar(estadoId);
-		
-		return estadoRepository.save(estado);
-	}
-	
-	public List<Estado> listar(){
-		return estadoRepository.findAll();
-	}
-	
-	
 	public void deletar(Long estadoId) {
 		Estado estado = buscarOuFalhar(estadoId);
 		estadoRepository.delete(estado);
