@@ -4,14 +4,19 @@ import java.util.List;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.algaworks.algaschool.domain.exception.EntidadeNaoEncontradaException;
+import com.algaworks.algaschool.domain.exception.EstadoNaoEncontradoException;
 import com.algaworks.algaschool.domain.modelo.Cidade;
 import com.algaworks.algaschool.domain.modelo.Estado;
 import com.algaworks.algaschool.domain.repository.CidadeRepository;
@@ -28,10 +33,8 @@ public class CidadeController {
 	@Autowired
 	private CadastroCidadeService cidadeService;
 	
-	@Autowired
-	private CadastroEstadoService estadoService;
-	
 	@PostMapping
+	@ResponseStatus(HttpStatus.CREATED)
 	public Cidade salvar(@RequestBody Cidade cidade) {
 		return cidadeService.salvar(cidade);		
 		
@@ -41,13 +44,13 @@ public class CidadeController {
 	public Cidade atualizar(@PathVariable Long cidadeID, @RequestBody Cidade cidade) {
 	
 		try {
-			
-		} catch (Exception e) {
-			// TODO: handle exception
+			Cidade cidadeAtual = cidadeService.buscarOuFalhar(cidadeID);
+			BeanUtils.copyProperties(cidade, cidadeAtual, "id");
+			return cidadeService.salvar(cidadeAtual);
+		} catch (EntidadeNaoEncontradaException e) {
+			throw new EstadoNaoEncontradoException("Estado não encontrado");
 		}
-		Cidade cidadeAtual = cidadeService.buscarOuFalhar(cidadeID);
-		BeanUtils.copyProperties(cidade, cidadeAtual, "id");
-		return cidadeService.salvar(cidadeAtual);
+		
 	}
 	
 	@GetMapping("/{cidadeID}")
@@ -58,6 +61,11 @@ public class CidadeController {
 	@GetMapping
 	public List<Cidade> listar(){
 		return cidadeRepository.findAll();
+	}
+	
+	@DeleteMapping("/{cidadeID}")
+	public void deletar(@PathVariable Long cidadeID) {
+		cidadeService.deletar(cidadeID);
 	}
 	
 }

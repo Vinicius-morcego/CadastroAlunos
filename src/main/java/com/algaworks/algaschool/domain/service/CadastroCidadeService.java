@@ -1,6 +1,7 @@
 package com.algaworks.algaschool.domain.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.algaworks.algaschool.domain.exception.CidadeNaoEncontradaException;
@@ -23,6 +24,14 @@ public class CadastroCidadeService {
 		return cidadeRepository.save(cidade);
 	}	
 	
+	public void deletar(Long cidadeID) {
+		try {
+			cidadeRepository.deleteById(cidadeID);
+		} catch (EmptyResultDataAccessException e) {
+			throw new CidadeNaoEncontradaException(cidadeID);
+		}
+		
+	}
 	
 	public Cidade buscarOuFalhar(Long cidadeId) {
 		return cidadeRepository.findById(cidadeId).orElseThrow(() -> 

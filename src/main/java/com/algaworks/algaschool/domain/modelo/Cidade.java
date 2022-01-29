@@ -21,14 +21,13 @@ public class Cidade {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@EqualsAndHashCode.Include
-	
 	private Long id;
 	
-	@NotNull
+	//@NotNull
 	@Column
 	private String nome;
 	
-	@NotNull
+	//@NotNull
 	@ManyToOne
 	@JoinColumn(name = "cidade_estado_id")
 	private Estado estado;
