@@ -21,7 +21,8 @@ public class CadastroCidadeService {
 		Estado estado = estadoService.buscarOuFalhar(cidade.getEstado().getId());
 		cidade.setEstado(estado);
 		return cidadeRepository.save(cidade);
-	}
+	}	
+	
 	
 	public Cidade buscarOuFalhar(Long cidadeId) {
 		return cidadeRepository.findById(cidadeId).orElseThrow(() -> 

@@ -21,9 +21,10 @@ public class Cidade {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@EqualsAndHashCode.Include
-	@NotNull
+	
 	private Long id;
 	
+	@NotNull
 	@Column
 	private String nome;
 	

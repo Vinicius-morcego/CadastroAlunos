@@ -17,7 +17,7 @@ import lombok.EqualsAndHashCode;
 @Entity
 public class Estado {
 
-	@NotNull
+
 	@Id
 	@EqualsAndHashCode.Include
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
