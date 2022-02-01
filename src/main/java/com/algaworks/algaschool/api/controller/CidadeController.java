@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.algaworks.algaschool.domain.exception.CidadeNaoEncontradaException;
 import com.algaworks.algaschool.domain.exception.EntidadeNaoEncontradaException;
 import com.algaworks.algaschool.domain.exception.EstadoNaoEncontradoException;
 import com.algaworks.algaschool.domain.modelo.Cidade;
@@ -53,18 +56,24 @@ public class CidadeController {
 		
 	}
 	
+	
 	@GetMapping("/{cidadeID}")
 	public Cidade buscar(@PathVariable Long cidadeID) {
+		
 		return cidadeService.buscarOuFalhar(cidadeID);
+		
 	}
 	
 	@GetMapping
+	@ResponseStatus(HttpStatus.OK)
 	public List<Cidade> listar(){
 		return cidadeRepository.findAll();
 	}
 	
+	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@DeleteMapping("/{cidadeID}")
 	public void deletar(@PathVariable Long cidadeID) {
+	
 		cidadeService.deletar(cidadeID);
 	}
 	

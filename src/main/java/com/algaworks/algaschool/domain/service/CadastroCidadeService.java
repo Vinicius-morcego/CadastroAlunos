@@ -1,10 +1,12 @@
 package com.algaworks.algaschool.domain.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.algaworks.algaschool.domain.exception.CidadeNaoEncontradaException;
+import com.algaworks.algaschool.domain.exception.EntidadeEmUsoException;
 import com.algaworks.algaschool.domain.modelo.Cidade;
 import com.algaworks.algaschool.domain.modelo.Estado;
 import com.algaworks.algaschool.domain.repository.CidadeRepository;
@@ -29,6 +31,8 @@ public class CadastroCidadeService {
 			cidadeRepository.deleteById(cidadeID);
 		} catch (EmptyResultDataAccessException e) {
 			throw new CidadeNaoEncontradaException(cidadeID);
+		} catch (DataIntegrityViolationException e) {
+			throw new EntidadeEmUsoException(String.format("Cidade de código %d em uso", cidadeID));
 		}
 		
 	}

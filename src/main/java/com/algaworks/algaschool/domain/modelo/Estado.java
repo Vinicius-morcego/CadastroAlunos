@@ -20,6 +20,7 @@ import lombok.EqualsAndHashCode;
 public class Estado {
 
 
+	@JsonIgnore
 	@Id
 	@EqualsAndHashCode.Include
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
