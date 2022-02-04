@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import com.algaworks.algaschool.domain.modelo.Aluno;
 
 @Repository
-public interface AlunoRepository extends JpaRepository<Aluno, Long>{
+public interface AlunoRepository extends JpaRepository<Aluno, Long>, AlunoRepositoryQueries{
 
+	
 }

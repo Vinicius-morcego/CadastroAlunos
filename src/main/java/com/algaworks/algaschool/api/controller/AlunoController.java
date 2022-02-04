@@ -49,6 +49,11 @@ public class AlunoController {
 		return alunoService.buscarOuFalhar(alunoID);
 	}
 	
+	@GetMapping("/consultar-por-nome")
+	public List<Aluno> buscarPorNome(String nome){
+		return alunoRepository.find(nome);
+	}
+	
 	@DeleteMapping("/{alunoID}")
 	public void deletar(@PathVariable Long alunoID) {
 		alunoService.deletar(alunoID);
