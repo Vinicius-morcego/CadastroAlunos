@@ -49,9 +49,9 @@ public class AlunoController {
 		return alunoService.buscarOuFalhar(alunoID);
 	}
 	
-	@GetMapping("/consultar-por-nome")
-	public List<Aluno> buscarPorNome(String nome){
-		return alunoRepository.find(nome);
+	@GetMapping("/consultar-por-nome-ou-idade")
+	public List<Aluno> buscarPorNomeouIdade(String nome, String idade){
+		return alunoRepository.find(nome, idade);
 	}
 	
 	@DeleteMapping("/{alunoID}")

@@ -22,7 +22,7 @@ public class AlunoRepositoryImpl implements AlunoRepositoryQueries{
 	private EntityManager manager;
 	
 	@Override
-	public List<Aluno> find(String nome){
+	public List<Aluno> find(String... parametros){
 	
 		CriteriaBuilder builder = manager.getCriteriaBuilder();
 		
@@ -30,9 +30,11 @@ public class AlunoRepositoryImpl implements AlunoRepositoryQueries{
 		
 		Root<Aluno> root = criteria.from(Aluno.class); //from Aluno
 		
-		Predicate nomePredicate = builder.like(root.get("nome"), "%"+nome+"%");
+		Predicate nomePredicate = builder.like(root.get("nome"), "%"+parametros[0]+"%");
 		
-		criteria.where(nomePredicate);
+		Predicate idadePredicate = builder.lessThanOrEqualTo(root.get("idade"), parametros[1].toString());
+		
+		criteria.where(nomePredicate, idadePredicate);
 		
 		TypedQuery<Aluno> query = manager.createQuery(criteria);
 		

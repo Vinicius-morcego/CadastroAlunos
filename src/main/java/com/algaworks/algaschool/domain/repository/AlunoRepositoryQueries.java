@@ -6,6 +6,6 @@ import com.algaworks.algaschool.domain.modelo.Aluno;
 
 public interface AlunoRepositoryQueries {
 
-	List<Aluno> find(String nome);
+	List<Aluno> find(String... parametrosDaConsulta);
 
 }
