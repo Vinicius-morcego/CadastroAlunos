@@ -1,12 +1,11 @@
 package com.algaworks.algaschool.domain.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.algaworks.algaschool.domain.modelo.Aluno;
 
 @Repository
-public interface AlunoRepository extends JpaRepository<Aluno, Long>, AlunoRepositoryQueries{
+public interface AlunoRepository extends CustomJpaRepository<Aluno, Long>, AlunoRepositoryQueries{
 
 	
 }

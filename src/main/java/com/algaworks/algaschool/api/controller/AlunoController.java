@@ -1,6 +1,7 @@
 package com.algaworks.algaschool.api.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,9 +51,15 @@ public class AlunoController {
 	}
 	
 	@GetMapping("/consultar-por-nome-ou-idade")
-	public List<Aluno> buscarPorNomeouIdade(String nome, String idade){
-		return alunoRepository.find(nome, idade);
+	public List<Aluno> buscarPorNomeouIdade(String nome, String idadeMaiorIgual, String idadeMenorIgual){
+		return alunoRepository.find(nome, idadeMaiorIgual, idadeMenorIgual);
 	}
+	
+	@GetMapping
+	public Optional<Aluno> buscarPrimeiro(){
+		return alunoRepository.buscarPrimeiro();
+	}
+	
 	
 	@DeleteMapping("/{alunoID}")
 	public void deletar(@PathVariable Long alunoID) {
